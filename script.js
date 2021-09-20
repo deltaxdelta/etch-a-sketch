@@ -35,17 +35,45 @@ function buildGrid(count) {
 
     
 function blacken(){
-    
-    for (let i = 0; i < currentSquares.length; i++) 
+    //refactor using currentSquares like an array cuz you can do that shit
+    // Order of preference of ways of iterating:
+    // 1. map
+    // 2. forEach
+    // 3. for ... of
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseover', () => {
+            datSquare.classList.add('black');
+        });
+    }
+    /*   for (let i = 0; i < currentSquares.length; i++) 
      
         currentSquares[i].addEventListener('mouseover', function() {currentSquares[i].classList.add('black')});
-    
+     */
 }
+//instead of for loop use literally anything else to ensure nonbrokeness
 
-/* //reset grid to white
+ //reset grid to white
 function whiten() {
-    for (let i = 0; i < currentSquares.length; i++) 
+    /* for (let i = 0; i < currentSquares.length; i++) 
      
-        {currentSquares[i].classList.remove('black')};
-    
-} */
+        {currentSquares[i].classList.remove('black')}; */
+    //ditch for loop here as well
+
+    for(const datSquare of currentSquares) {
+        datSquare.classList.remove('black');
+    }
+} 
+
+//ui control stuff, how to organize?
+
+//grid size slider stuff
+let showSliderOutput = document.getElementById('currentGridSize');
+let sliderSet = document.getElementById('slider').value;
+showSliderOutput.innerHTML = sliderSet + ' x ' + sliderSet;
+//change the number displayed based on slider position
+let slider = document.getElementById('slider');
+slider.oninput = updateValue();
+//not working yet!
+function updateValue() {
+    showSliderOutput.innerHTML = sliderSet + ' x ' + sliderSet; 
+}

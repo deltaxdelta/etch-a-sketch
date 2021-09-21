@@ -21,9 +21,25 @@
         <div class='container row'>
             <div id='leftMenu'>
                 <div id='setSquares'>
-                    
+                    <div class='wrapper' id='gridAdjuster'>
+                        <div id='labelBlock'><label>Set Grid Size</label></div>
+                        <div class='sizeControls' id='minusBtn'>
+                            <button class='sizeBtn' id='minus'>-</button>
+                        </div>
+                        
+                         <div id='displaySize'>  
+                            <input id='currentSize' type='number' min='2' max='100' value='16'>
+                        </div>  
+                        <div id='spanBlock'>x <span id='makeItSquare'></span></div>
+                        <div class='sizeControls' id='plusBtn'>
+                            <button class='sizeBtn' id='plus'>+</button>
+                        </div>
+                    </div> 
                 </div>
+                
+                
             </div>
+            
             <div id='canvasArea'>
                 <div class='gridSize' id='etchy'>
 
@@ -31,13 +47,8 @@
             </div>
             <div id='moreOptions'></div>
         </div>
-        <div class='container' id='gridAdjusters'>
-            <div id='sliderContainer'>
-                <label for='2'>Set grid size</label>
-                <input type='range' min='2' max='100' value='2' id='slider'>
-                <span id='currentGridSize'></span>
-            </div>
-        </div>
+        
+        
         <div class='container' id='footer'></div>
         <script src="script.js" async defer></script>
     </body>

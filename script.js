@@ -171,13 +171,19 @@ const picker = document.getElementById('picker');
 picker.addEventListener('change', getColor);
 
 function getColor() {
-    let newColor = picker.value; //scope?
-  
-    
-   
-}
+    cloneCanvas();
+    let newColor = picker.value;
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseenter', function newPaint()
+        {datSquare.setAttribute('style', 'background-color: ' + newColor + ';' );}
+        );
+        
+    }
+} 
 
-//to remove event listeners for blacken, clone canvas
+
+
+//to remove event listeners on canvas, use cloneCanvas
 let canvasArea = document.getElementById('canvasArea');
 
 function cloneCanvas() {
@@ -188,5 +194,12 @@ function cloneCanvas() {
     tempEtchy.id = 'etchy';
 }
 
+/* for (const datSquare of currentSquares) {
+    datSquare.addEventListener('mouseover', () => 
+    {datSquare.classList.add('black');
+    });
+} 
+    etchy.setAttribute('style', 'grid-template-columns: repeat(' + count + ', 1fr);');
+ */
 
-//do I need to refactor blacken and whiten functions to work like color picker?
+//do I need to refactor blacken function to work like color picker?

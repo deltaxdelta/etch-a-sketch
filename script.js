@@ -160,11 +160,8 @@ clearBtn.addEventListener('click', whiten);
 
 
 
-//change color of drawing: custom, rainbow
-//add shading effect option (click from light gray to black)
-//set default grid to 16x16 on pageload
-
 //pick any color
+
 
 const picker = document.getElementById('picker');
 
@@ -172,6 +169,7 @@ picker.addEventListener('change', getColor);
 
 function getColor() {
     cloneCanvas();
+   
     let newColor = picker.value;
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function newPaint()
@@ -181,25 +179,59 @@ function getColor() {
     }
 } 
 
-
-
 //to remove event listeners on canvas, use cloneCanvas
 let canvasArea = document.getElementById('canvasArea');
 
+//ISSUE cloneCanvas is appending more than one etchy element to document on successive calls
+//not sure why since function removes etchy before replacing it with clone
+//this seems to go away if using remove/append child methods
+//now it doesn't see new etchy as a child of canvasArea, even though it is appended as such, and ID is changed???
+//not sure, but can probably just scrub whatever child node canvasArea has? or lastChild?
 function cloneCanvas() {
     let tempEtchy = etchy.cloneNode(true);
-    tempEtchy.id = 'tempEtchy'; //this is not in the document
-    etchy.remove();
+    tempEtchy.id = 'tempEtchy';
+    canvasArea.removeChild(etchy);
     canvasArea.appendChild(tempEtchy);
     tempEtchy.id = 'etchy';
+    console.log(canvasArea.lastChild);
+    
+    /* let tempEtchy = etchy.cloneNode(true);
+    tempEtchy.id = 'tempEtchy'; //this is not in the document
+    etchy.remove(); //this is still hanging out somewhere, but is off the document?
+    // canvasArea.appendChild(tempEtchy); //this adds it to the document
+    // tempEtchy.id = 'etchy'; */
+    
 }
 
-/* for (const datSquare of currentSquares) {
-    datSquare.addEventListener('mouseover', () => 
-    {datSquare.classList.add('black');
-    });
-} 
-    etchy.setAttribute('style', 'grid-template-columns: repeat(' + count + ', 1fr);');
- */
+//TODO: 
+//rainbow mode option
+//add shading effect option (click from light gray to black)
+//set default grid to 16x16 on pageload
+//style to look not so garbage
+//what is this runtime error?
 
-//do I need to refactor blacken function to work like color picker?
+
+//throw event listener onto grid squares that puts on a random color on each mouseenter - if cloning again, more grid spawns?
+
+//generate random color
+
+
+
+//remove all event listeners (clone canvas)
+//apply new event listeners
+//get random color, set it as background of div on mouseenter
+function rainbowColor() {
+    //cloneCanvas();
+    
+
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseenter', function diffColors()
+        {   let randoColor = Math.floor(Math.random()*16777215).toString(16);
+            console.log(randoColor);
+            datSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );
+        }
+        );
+        
+    }
+    
+} 

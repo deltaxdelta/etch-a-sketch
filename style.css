@@ -50,6 +50,10 @@ body {
   background-color: black;
 }
 
+.white {
+  background-color: white;
+}
+
 /* widget for adjusting grid size */
 #setSquares {
   min-width: 150px;

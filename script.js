@@ -63,16 +63,16 @@ function blacken(){
 
 
  //reset grid to white
-function whiten() {
-    /* for (let i = 0; i < currentSquares.length; i++) 
+// function whiten() {
+//     /* for (let i = 0; i < currentSquares.length; i++) 
      
-        {currentSquares[i].classList.remove('black')}; */
-    //ditch for loop here as well
+//         {currentSquares[i].classList.remove('black')}; */
+//     //ditch for loop here as well
 
-    for(const datSquare of currentSquares) {
-        datSquare.classList.remove('black');
-    }
-} 
+//     for(const datSquare of currentSquares) {
+//         datSquare.classList.remove('black');
+//     }
+// } 
 
 //ui control stuff, how to organize?
 
@@ -375,6 +375,9 @@ function grayScaleMode() {
     
 } 
 
+let goGray = document.getElementById('goGray');
+goGray.addEventListener('click', grayScaleMode);
+
 //let's use data tags!
 
 
@@ -382,3 +385,16 @@ function grayScaleMode() {
 //check if data-bkgd exists
 //check value, increase to next gray value (gray2, gray3, etc) ---how?
 //dataset.value?
+
+//eraser mode
+
+function eraserMode() {
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseenter', function whiten() {
+            datSquare.removeAttribute('style');
+            datSquare.classList.remove('black');
+            datSquare.classList.add('white');
+            }
+        );
+    }
+}

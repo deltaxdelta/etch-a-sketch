@@ -154,10 +154,13 @@ function biggen() {
 //constraint validation?
 //keyup/keydown?
 
-//button to clear grid
+//button to clear grid --going to just reload the whole thing
 const clearBtn = document.getElementById('clearBtn');
-clearBtn.addEventListener('click', whiten);
+clearBtn.addEventListener('click', resetGrid);
 
+function resetGrid() {
+    buildGrid(sizeSet.value);
+}
 
 
 //pick any color
@@ -168,7 +171,7 @@ const picker = document.getElementById('picker');
 picker.addEventListener('change', getColor);
 
 function getColor() {
-    cloneCanvas();
+    //cloneCanvas();
    
     let newColor = picker.value;
     for (const datSquare of currentSquares) {
@@ -187,13 +190,15 @@ let canvasArea = document.getElementById('canvasArea');
 //this seems to go away if using remove/append child methods
 //now it doesn't see new etchy as a child of canvasArea, even though it is appended as such, and ID is changed???
 //not sure, but can probably just scrub whatever child node canvasArea has? or lastChild?
+
+//color modes work fine without this!
 function cloneCanvas() {
     let tempEtchy = etchy.cloneNode(true);
     tempEtchy.id = 'tempEtchy';
     canvasArea.removeChild(etchy);
     canvasArea.appendChild(tempEtchy);
     tempEtchy.id = 'etchy';
-    console.log(canvasArea.lastChild);
+   
     
     /* let tempEtchy = etchy.cloneNode(true);
     tempEtchy.id = 'tempEtchy'; //this is not in the document
@@ -206,28 +211,23 @@ function cloneCanvas() {
 //TODO: 
 //rainbow mode option
 //add shading effect option (click from light gray to black)
+//eraser mode
 //set default grid to 16x16 on pageload
+//review event listener options for color input
 //style to look not so garbage
 //what is this runtime error?
-
-
-//throw event listener onto grid squares that puts on a random color on each mouseenter - if cloning again, more grid spawns?
-
-//generate random color
+//Clear button doesn't wipe canvas now :( --just set the grid at the same size again and yay?
 
 
 
-//remove all event listeners (clone canvas)
-//apply new event listeners
-//get random color, set it as background of div on mouseenter
+//rainbow mode 
+
 function rainbowColor() {
-    //cloneCanvas();
+    //cloneCanvas(); --works without this
     
-
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function diffColors()
         {   let randoColor = Math.floor(Math.random()*16777215).toString(16);
-            console.log(randoColor);
             datSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );
         }
         );
@@ -235,3 +235,150 @@ function rainbowColor() {
     }
     
 } 
+
+let rainbowMode = document.getElementById('rainbowMode');
+rainbowMode.addEventListener('click', rainbowColor);
+
+//grayscale mode
+//each pass over square makes it 10% darker, with 100% == black
+
+//since the colors are set, let's just get them
+/* 
+0 white (default) rgb(255, 255, 255) or #FFFFFF
+1 rgb(240,240,240), #F0F0F0
+2 rgb(228, 228, 228), #E4E4E4
+3 rgb(198,198,198), #C6C6C6
+4 rgb(172,172,172), #ACACAC
+5 rgb(136, 136, 136), #888888
+6 rgb(110,110, 110), #6E6E6E
+7 rgb(88,88,88), #585858
+8 rgb(55, 55, 55), #373737
+9 black (stop here) rgb(0, 0, 0) or #000000
+*/
+//^^^these are classes now
+
+//initiate grayscale mode
+//if white or (anything but black) change to gray1
+//if gray1, change to gray2...
+//if gray 8, change to black
+//if black, stays black
+
+//className
+
+//refactoring this mess
+/* 
+
+function grayScaleMode() {
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseenter', () => {
+            
+    
+            if (datSquare.className == 'canvasSquare gray1') {
+                datSquare.classList.remove = 'gray1';
+                datSquare.classList.add = 'gray2';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray2') {
+                datSquare.classList.remove = 'gray2';
+                datSquare.classList.add = 'gray3';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray3') {
+                datSquare.classList.remove = 'gray3';
+                datSquare.classList.add = 'gray4';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray4') {
+                datSquare.classList.remove = 'gray4';
+                datSquare.classList.add = 'gray5';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray5') {
+                datSquare.classList.remove = 'gray5';
+                datSquare.classList.add = 'gray6';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray6') {
+                datSquare.classList.remove = 'gray6';
+                datSquare.classList.add = 'gray7';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray7') {
+                datSquare.classList.remove = 'gray7';
+                datSquare.classList.add = 'gray8';
+            }
+    
+            else if (datSquare.className == 'canvasSquare gray8') {
+                datSquare.classList.remove = 'gray8';
+                datSquare.classList.add = 'black';
+            }
+    
+            else {
+                
+                    datSquare.classList.add = 'gray1';}
+                    
+                }
+
+        );
+     
+}
+   
+}
+ */
+
+function grayScaleMode() {
+    //there may be a prettier way to do this iteratively, dunno
+    for (const datSquare of currentSquares) {
+        datSquare.addEventListener('mouseenter', function grayify()
+        {   //magic goes here
+            if (this.dataset.bkgd == 'gray1') {
+                datSquare.setAttribute('data-bkgd', 'gray2');
+                
+            }
+
+            else if (this.dataset.bkgd == 'gray2') {
+                datSquare.setAttribute('data-bkgd', 'gray3');   
+            }
+
+            else if (this.dataset.bkgd == 'gray3') {
+                datSquare.setAttribute('data-bkgd', 'gray4');
+            }
+
+            else if (this.dataset.bkgd == 'gray4') {
+                datSquare.setAttribute('data-bkgd', 'gray5');
+            }
+
+            else if (this.dataset.bkgd == 'gray5') {
+                datSquare.setAttribute('data-bkgd', 'gray6');
+            }
+
+            else if (this.dataset.bkgd == 'gray6') {
+                datSquare.setAttribute('data-bkgd', 'gray7');
+            }
+
+            else if (this.dataset.bkgd == 'gray7') {
+                datSquare.setAttribute('data-bkgd', 'gray8');
+            }
+
+            else if (this.dataset.bkgd == 'gray8') {
+                datSquare.classList.add('black');
+            }
+
+            else {datSquare.setAttribute('data-bkgd', 'gray1');
+            }
+            
+
+        }
+        );
+        
+    }
+    
+} 
+
+//let's use data tags!
+
+
+
+//check if data-bkgd exists
+//check value, increase to next gray value (gray2, gray3, etc) ---how?
+//dataset.value?

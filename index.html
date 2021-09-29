@@ -18,7 +18,7 @@
         <![endif]-->
         
         <div class='container' id='header'></div>
-        <div class='container row'>
+        <div class='container row' id='coreContent'>
             <div id='leftMenu'>
                 <div id='setSquares'>
                     <div class='wrapper' id='gridAdjuster'>
@@ -34,9 +34,28 @@
                         <div class='sizeControls' id='plusBtn'>
                             <button class='sizeBtn' id='plus'>+</button>
                         </div>
+                        
                     </div> 
+                    <div class='hideError' id='toolTip'>
+                        
+                        <span id='errorMsg'>Enter a value from 2 to 100</span>
+                        <button id='closeToolTip'>x</button>
+                       
+                    </div>
                 </div>
                 
+                <div id='clearCanvas'>
+                   <button id='clearBtn'>Clear</button> 
+                </div>
+                <div id='selectColor'>
+                    <label>Set Color</label>
+                    <input type='color' id='picker' name='currentColor' value='#000000'>
+                </div>
+                
+                <div id='rainbowMode'>
+                    <button id='goRainbow'>Rainbow Mode</button>
+                    
+                </div>
                 
             </div>
             

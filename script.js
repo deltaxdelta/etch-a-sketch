@@ -172,7 +172,7 @@ const picker = document.getElementById('picker');
 picker.addEventListener('change', getColor);
 
 function getColor() {
-   //cloneCanvas();
+   cloneCanvas();
    
     let newColor = picker.value;
     for (const datSquare of currentSquares) {
@@ -195,6 +195,8 @@ let canvasArea = document.getElementById('canvasArea');
 //not sure, but can probably just scrub whatever child node canvasArea has? or lastChild?
 
 //color modes work fine without this!
+
+//call this to wipe event listeners
 function cloneCanvas() {
     let etchy = document.getElementById('etchy'); //this needs to be initialized each time or you only clone one specific instance
     let newb = etchy.cloneNode(true);
@@ -230,7 +232,7 @@ let nodeList = canvasArea.childNodes;
 //rainbow mode 
 
 function rainbowColor() {
-    
+    cloneCanvas();
     
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function diffColors()
@@ -336,6 +338,8 @@ function grayScaleMode() {
  */
 
 function grayScaleMode() {
+    cloneCanvas();
+    
     //there may be a prettier way to do this iteratively, dunno
   
     for (const datSquare of currentSquares) {
@@ -410,10 +414,11 @@ goGray.addEventListener('click', grayScaleMode);
 //eraser mode
 
 function eraserMode() {
-  //  cloneCanvas();
+  cloneCanvas();
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function whiten() {
             datSquare.removeAttribute('style');
+            datSquare.removeAttribute('data-bkgd');
             datSquare.classList.remove('black');
             datSquare.classList.add('white');
            // console.log(datSquare.getAttribute('style'));
@@ -422,4 +427,7 @@ function eraserMode() {
         );
     }
 }
+
+let whiteOut = document.getElementById('eraserBtn');
+whiteOut.addEventListener('click', eraserMode);
 

@@ -48,7 +48,8 @@ function blacken(){
 
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseover', () => 
-        {datSquare.classList.add('black');
+        {   
+            datSquare.classList.add('black');
         });
     } 
 
@@ -171,12 +172,14 @@ const picker = document.getElementById('picker');
 picker.addEventListener('change', getColor);
 
 function getColor() {
-    //cloneCanvas();
+   //cloneCanvas();
    
     let newColor = picker.value;
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function newPaint()
-        {datSquare.setAttribute('style', 'background-color: ' + newColor + ';' );}
+        {   
+            console.log('firing getColor');
+            datSquare.setAttribute('style', 'background-color: ' + newColor + ';' );}
         );
         
     }
@@ -193,25 +196,29 @@ let canvasArea = document.getElementById('canvasArea');
 
 //color modes work fine without this!
 function cloneCanvas() {
-    let tempEtchy = etchy.cloneNode(true);
-    tempEtchy.id = 'tempEtchy';
-    canvasArea.removeChild(etchy);
-    canvasArea.appendChild(tempEtchy);
-    tempEtchy.id = 'etchy';
-   
-    
-    /* let tempEtchy = etchy.cloneNode(true);
-    tempEtchy.id = 'tempEtchy'; //this is not in the document
-    etchy.remove(); //this is still hanging out somewhere, but is off the document?
-    // canvasArea.appendChild(tempEtchy); //this adds it to the document
-    // tempEtchy.id = 'etchy'; */
+    let etchy = document.getElementById('etchy'); //this needs to be initialized each time or you only clone one specific instance
+    let newb = etchy.cloneNode(true);
+   canvasArea.appendChild(newb);
+   newb.id = 'newb';
+   let oldetch = document.querySelector('#etchy');
+   oldetch.remove();
+   newb.id = 'etchy';
     
 }
+
+let nodeList = canvasArea.childNodes;
+
+//cloning makes me cry
+//looks like it's storing and replicating just the first clone?
 
 //TODO: 
 //rainbow mode option
 //add shading effect option (click from light gray to black)
 //eraser mode
+
+//bug: rainbow mode and custom color aren't overriden by grayscale --is cloning needed?
+//bug: eraser mode does weird things after other modes are used
+
 //set default grid to 16x16 on pageload
 //review event listener options for color input
 //style to look not so garbage
@@ -223,11 +230,13 @@ function cloneCanvas() {
 //rainbow mode 
 
 function rainbowColor() {
-    //cloneCanvas(); --works without this
+    
     
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function diffColors()
-        {   let randoColor = Math.floor(Math.random()*16777215).toString(16);
+        {    
+            console.log('firing rainbow');
+            let randoColor = Math.floor(Math.random()*16777215).toString(16);
             datSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );
         }
         );
@@ -328,43 +337,55 @@ function grayScaleMode() {
 
 function grayScaleMode() {
     //there may be a prettier way to do this iteratively, dunno
+  
     for (const datSquare of currentSquares) {
+        
         datSquare.addEventListener('mouseenter', function grayify()
-        {   //magic goes here
+        {   
+
+            //shade with each mouseenter until black
             if (this.dataset.bkgd == 'gray1') {
                 datSquare.setAttribute('data-bkgd', 'gray2');
-                
+                console.log('firing gray2');
             }
 
             else if (this.dataset.bkgd == 'gray2') {
-                datSquare.setAttribute('data-bkgd', 'gray3');   
+                datSquare.setAttribute('data-bkgd', 'gray3');  
+                console.log('firing gray3'); 
             }
 
             else if (this.dataset.bkgd == 'gray3') {
                 datSquare.setAttribute('data-bkgd', 'gray4');
+                console.log('firing gray4');
             }
 
             else if (this.dataset.bkgd == 'gray4') {
                 datSquare.setAttribute('data-bkgd', 'gray5');
+                console.log('firing gray5');
             }
 
             else if (this.dataset.bkgd == 'gray5') {
                 datSquare.setAttribute('data-bkgd', 'gray6');
+                console.log('firing gray6');
             }
 
             else if (this.dataset.bkgd == 'gray6') {
                 datSquare.setAttribute('data-bkgd', 'gray7');
+                console.log('firing gray7');
             }
 
             else if (this.dataset.bkgd == 'gray7') {
                 datSquare.setAttribute('data-bkgd', 'gray8');
+                console.log('firing gray8');
             }
 
             else if (this.dataset.bkgd == 'gray8') {
                 datSquare.classList.add('black');
+                console.log('firing black');
             }
 
             else {datSquare.setAttribute('data-bkgd', 'gray1');
+                console.log('firing gray1');
             }
             
 
@@ -389,12 +410,16 @@ goGray.addEventListener('click', grayScaleMode);
 //eraser mode
 
 function eraserMode() {
+  //  cloneCanvas();
     for (const datSquare of currentSquares) {
         datSquare.addEventListener('mouseenter', function whiten() {
             datSquare.removeAttribute('style');
             datSquare.classList.remove('black');
             datSquare.classList.add('white');
+           // console.log(datSquare.getAttribute('style'));
+            // console.log(datSquare.classList);
             }
         );
     }
 }
+

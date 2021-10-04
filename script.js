@@ -2,24 +2,32 @@
 const etchy = document.getElementById('etchy');
 
 function addSquare() {
+    let etchy = document.getElementById('etchy'); //this needs to be initialized each time or cloning breaks things
     let div = document.createElement('div');
     etchy.appendChild(div);
     div.className = 'canvasSquare';
     
 }
 
-let currentSquares = document.getElementsByClassName("canvasSquare");
+let currentSquares = document.getElementsByClassName("canvasSquare"); //this is an HTML collection, not nodes
+
+
 
 function wipeCanvas() {
-    while (currentSquares.length > 0) {
-        etchy.removeChild(currentSquares[0]);
+    let currentCanvas = document.getElementById('etchy');
+    let childSquares = currentCanvas.childNodes;
+    while (childSquares.length > 0) {
+        currentCanvas.removeChild(childSquares[0]);
     }
 }
 
 
 //add as many squares as entered with variable count
 function buildGrid(count) {
+    
     wipeCanvas(); //needs to remove all canvasSquare divs before running
+    let etchy = document.getElementById('etchy'); //this needs to be initialized each time or cloning breaks things
+    span.innerText = count;
     let gridSize = count * count;
     for(i = 0; i < gridSize; i++) {addSquare();}
     etchy.setAttribute('style', 'grid-template-columns: repeat(' + count + ', 1fr);');
@@ -107,7 +115,7 @@ function getNum() {
    else {
     closeOut(); //close error message if there's a good entry put in
     buildGrid(sizeSet.value);
-    span.innerHTML = sizeSet.value; //number in input is shown in span as well for nice AxA format 
+    span.innerText = sizeSet.value; //number in input is shown in span as well for nice AxA format 
    }
 }
 
@@ -135,7 +143,7 @@ minus.addEventListener('click', smallen);
 function smallen() {
     sizeSet.stepDown(); //doesn't register as a change for getNum to run
     buildGrid(sizeSet.value);
-    span.innerHTML = sizeSet.value;
+    span.innerText = sizeSet.value;
 }
 
 //listen to plus button and run add on input - stepup?
@@ -146,7 +154,7 @@ plus.addEventListener('click', biggen);
 function biggen() {
     sizeSet.stepUp(); //doesn't register as a change for getNum to run
     buildGrid(sizeSet.value);
-    span.innerHTML = sizeSet.value;
+    span.innerText = sizeSet.value;
 }
 
 //if typed num is not >= 2 or <= 100 display error msg instead of passing to buildGrid
@@ -169,7 +177,7 @@ function resetGrid() {
 
 const picker = document.getElementById('picker');
 
-picker.addEventListener('change', getColor);
+picker.addEventListener('input', getColor);
 
 function getColor() {
    cloneCanvas();
@@ -204,6 +212,7 @@ function cloneCanvas() {
    newb.id = 'newb';
    let oldetch = document.querySelector('#etchy');
    oldetch.remove();
+   etchy = null;
    newb.id = 'etchy';
     
 }
@@ -213,19 +222,28 @@ let nodeList = canvasArea.childNodes;
 //cloning makes me cry
 //looks like it's storing and replicating just the first clone?
 
-//TODO: 
+//DONE: 
 //rainbow mode option
 //add shading effect option (click from light gray to black)
 //eraser mode
+//set default grid to 16x16 on pageload
+//review event listener options for color input
 
+//FIXED:
 //bug: rainbow mode and custom color aren't overriden by grayscale --is cloning needed?
 //bug: eraser mode does weird things after other modes are used
 
-//set default grid to 16x16 on pageload
-//review event listener options for color input
+//ISSUES:
+//clear button doesn't work after some point --fails after an option using cloneCanvas is used
+//grid adjuster doesn't work after some point --fails after an option using cloneCanvas is used
+
+
+
+
+//TODO:
 //style to look not so garbage
 //what is this runtime error?
-//Clear button doesn't wipe canvas now :( --just set the grid at the same size again and yay?
+
 
 
 
@@ -430,4 +448,9 @@ function eraserMode() {
 
 let whiteOut = document.getElementById('eraserBtn');
 whiteOut.addEventListener('click', eraserMode);
+
+//default to 16x16 grid on load/reload
+
+window.addEventListener('onload', buildGrid(16));
+
 

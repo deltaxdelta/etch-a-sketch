@@ -47,7 +47,45 @@
                 <div id='clearCanvas'>
                    <button id='clearBtn'>Clear</button> 
                 </div>
-                <div id='selectColor'>
+
+                <div id='modeArea'>
+                    <div>
+                        <input id='blacken' name='mode' type='radio' value='blacken' checked>
+                        <label>Black</label>
+                    </div>
+
+
+                   <div>
+                        <input id='customColor' name='mode' type='radio' value='customColor'>
+                        <label>Color</label>
+                        <input type='color' id='picker' name='currentColor' value='#000000'>
+                            
+                   </div>
+
+
+                    <div>
+                        <input id='rainbow' name='mode' type='radio' value='rainbow'>
+                        <label>Rainbow</label>
+                    </div>
+
+
+                    <div>
+                        <input id='grayScale' name='mode' type='radio' value='grayScale'>
+                        <label>Grayscale</label>
+                    </div>
+
+
+                    <div>
+                        <input id='eraser' name='mode' type='radio' value='eraser'>
+                        <label>Eraser</label>
+                    </div>
+
+
+                </div>
+                <!-- 
+                    using buttons
+
+                    <div id='selectColor'>
                     <label>Set Color</label>
                     <input type='color' id='picker' name='currentColor' value='#000000'>
                 </div>
@@ -65,7 +103,7 @@
                 <div id='eraser'>
                     <button id='eraserBtn'>Eraser</button>
                     
-                </div>
+                </div> -->
 
             </div>
             
@@ -79,6 +117,7 @@
         
         
         <div class='container' id='footer'></div>
-        <script src="script.js" async defer></script>
+        <!-- <script src="script.js" async defer></script> -->
+        <script src="newscript.js" async defer></script>
     </body>
 </html>

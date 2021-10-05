@@ -103,7 +103,7 @@ function resetGrid() {
 }
 
 
-//set eventListeners on grid squares
+//set one eventListener on grid squares
 const etchy = document.getElementById('etchy');
 
 etchy.addEventListener('mouseover', getMode);
@@ -112,10 +112,89 @@ function getMode(e) {
    //this keeps it for the children
     if(e.target !== e.currentTarget) {
         let enteredSquare = e.target;
-        //magic here
-        enteredSquare.classList.add('black');
+        const blackMode = document.getElementById('blacken');
+        const rainbowMode = document.getElementById('rainbow');
+        const grayMode = document.getElementById('grayScale');
+        const eraseMode = document.getElementById('eraser');
+
+        if(blackMode.checked == true) {
+            enteredSquare.classList.add('black');
+            console.log('Black is checked');}
+        
+        else if (rainbowMode.checked == true) {
+            let randoColor = Math.floor(Math.random()*16777215).toString(16);
+            enteredSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );}
+        
+        else if (grayMode.checked == true) {
+            
+            if (enteredSquare.dataset.bkgd == 'gray1') {
+                enteredSquare.setAttribute('data-bkgd', 'gray2');
+                console.log('firing gray2');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray2') {
+                enteredSquare.setAttribute('data-bkgd', 'gray3');  
+                console.log('firing gray3'); 
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray3') {
+                enteredSquare.setAttribute('data-bkgd', 'gray4');
+                console.log('firing gray4');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray4') {
+                enteredSquare.setAttribute('data-bkgd', 'gray5');
+                console.log('firing gray5');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray5') {
+                enteredSquare.setAttribute('data-bkgd', 'gray6');
+                console.log('firing gray6');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray6') {
+                enteredSquare.setAttribute('data-bkgd', 'gray7');
+                console.log('firing gray7');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray7') {
+                enteredSquare.setAttribute('data-bkgd', 'gray8');
+                console.log('firing gray8');
+            }
+
+            else if (enteredSquare.dataset.bkgd == 'gray8') {
+                enteredSquare.classList.add('black');
+                console.log('firing black');
+            }
+
+            else {enteredSquare.setAttribute('data-bkgd', 'gray1');
+                console.log('firing gray1');
+            }
+        }
+
+        else if (eraseMode.checked == true) {
+            enteredSquare.removeAttribute('style');
+            enteredSquare.removeAttribute('data-bkgd');
+            enteredSquare.classList.remove('black');
+            enteredSquare.classList.add('white');
+        }
+
+        else {console.log('mode isn\'t set yet');}
+        
     } 
     e.stopPropagation();
-    console.log(e);
+    //console.log(e);
 
 }
+
+//each featue gets an on/off true/false
+//only one can be true at a time --radio buttons?
+//if [mode] is true, run [relevant function] in getMode
+//else [nuthin?]
+
+//radio values
+// blacken
+// customColor
+// rainbow
+// grayScale
+// eraser

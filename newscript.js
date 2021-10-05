@@ -118,15 +118,21 @@ function getMode(e) {
         const eraseMode = document.getElementById('eraser');
 
         if(blackMode.checked == true) {
-            enteredSquare.classList.add('black');
-            console.log('Black is checked');}
+            enteredSquare.removeAttribute('style');
+            enteredSquare.removeAttribute('data-bkgd');
+            enteredSquare.setAttribute('style', 'background-color: black;' );}
+            
         
         else if (rainbowMode.checked == true) {
+            enteredSquare.removeAttribute('style');
+            enteredSquare.removeAttribute('data-bkgd');
             let randoColor = Math.floor(Math.random()*16777215).toString(16);
             enteredSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );}
         
         else if (grayMode.checked == true) {
+            enteredSquare.removeAttribute('style');
             
+
             if (enteredSquare.dataset.bkgd == 'gray1') {
                 enteredSquare.setAttribute('data-bkgd', 'gray2');
                 console.log('firing gray2');
@@ -175,8 +181,7 @@ function getMode(e) {
         else if (eraseMode.checked == true) {
             enteredSquare.removeAttribute('style');
             enteredSquare.removeAttribute('data-bkgd');
-            enteredSquare.classList.remove('black');
-            enteredSquare.classList.add('white');
+            enteredSquare.setAttribute('style', 'background-color: white;' );
         }
 
         else {console.log('mode isn\'t set yet');}

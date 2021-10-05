@@ -116,12 +116,20 @@ function getMode(e) {
         const rainbowMode = document.getElementById('rainbow');
         const grayMode = document.getElementById('grayScale');
         const eraseMode = document.getElementById('eraser');
+        const customColor = document.getElementById('customColor');
 
         if(blackMode.checked == true) {
             enteredSquare.removeAttribute('style');
             enteredSquare.removeAttribute('data-bkgd');
             enteredSquare.setAttribute('style', 'background-color: black;' );}
+         
+        else if (customColor.checked == true) {
             
+            enteredSquare.removeAttribute('data-bkgd');
+            const picker = document.getElementById('picker');
+            enteredSquare.setAttribute('style', 'background-color: ' + picker.value + ';' );
+            }
+        
         
         else if (rainbowMode.checked == true) {
             enteredSquare.removeAttribute('style');

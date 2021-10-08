@@ -1,5 +1,6 @@
 body {
-  background-color: thistle;
+  background-color: rgb(217, 221, 235);
+  font-family: "Nunito", sans-serif;
 }
 
 .container {
@@ -32,7 +33,7 @@ body {
   display: grid;
   width: 600px;
   height: 600px;
-  background-color: teal;
+  background-color: white;
   border-style: solid;
   border-color: rgb(201, 201, 201);
   border-width: 1px;
@@ -54,6 +55,13 @@ body {
   background-color: white;
 }
 
+/* glow settings */
+
+.glowText {
+  color: blue;
+  text-shadow: 0 0 3px rgb(53, 53, 240);
+}
+
 /* widget for adjusting grid size */
 #setSquares {
   min-width: 150px;
@@ -65,26 +73,55 @@ body {
   grid-template-areas:
     "label label label label"
     "minus sizer span plus";
+  font-size: medium;
 }
 
 #labelBlock {
   grid-area: label;
+  justify-self: center;
 }
 
 #minusBtn {
   grid-area: minus;
+  justify-self: end;
+  align-self: center;
+  border: 1px solid rgb(144, 144, 255);
+  border-right: none;
+  border-bottom-left-radius: 9px;
+  border-top-left-radius: 9px;
 }
 
 #displaySize {
   grid-area: sizer;
+  text-align: center;
+  padding-right: 1px;
+  justify-self: center;
+  background-color: rgb(234, 247, 255);
+  align-self: center;
+  border-top: 1px solid rgb(144, 144, 255);
+  border-bottom: 1px solid rgb(144, 144, 255);
 }
 
 #spanBlock {
   grid-area: span;
+  background-color: rgb(234, 247, 255);
+  align-self: center;
+  font-family: "Nunito", sans-serif;
+  font-size: medium;
+  padding: 1px 0px;
+  border-top: 1px solid rgb(144, 144, 255);
+  border-bottom: 1px solid rgb(144, 144, 255);
+  color: blue;
 }
 
 #plusBtn {
   grid-area: plus;
+  justify-self: start;
+  align-self: center;
+  border: 1px solid rgb(144, 144, 255);
+  border-left: none;
+  border-bottom-right-radius: 9px;
+  border-top-right-radius: 9px;
 }
 
 /* switch off spinners, which appears to work **MDN advises this is non-standard!** */
@@ -96,19 +133,43 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #currentSize {
-  width: 20px;
   border: none;
   color: blue;
   background-color: transparent;
+  text-align: center;
+  width: auto;
+  font-family: "Nunito", sans-serif;
+  font-size: medium;
+}
+
+#currentSize:hover {
+  font-weight: bolder;
+  color: blue;
+  text-shadow: 0 0 3px rgb(94, 94, 200);
+}
+
+.sizeControls {
+  background-color: rgb(234, 247, 255);
+  z-index: 1;
 }
 
 .sizeBtn {
   border: none;
-  background-color: rgb(223, 223, 223);
+  background-color: rgb(234, 247, 255);
+  border-radius: 9px;
+  width: 25px;
+  font-family: "Poppins", sans-serif;
+  color: blue;
+  text-align: center;
+  height: 1.4rem;
 }
 
 .sizeBtn:hover {
-  background-color: rgb(182, 182, 182);
+  background-color: rgb(198, 233, 255);
+}
+
+.sizeBtn:active {
+  background-color: rgb(130, 182, 215);
 }
 
 /* toolTip for bad inputs */
@@ -147,8 +208,36 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* clear the grid button */
 #clearCanvas {
-  margin: 0 auto;
+  margin: 0px auto 10px auto;
   padding-top: 20px;
+}
+
+#clearBtn {
+  border: none;
+  background-color: rgb(234, 247, 255);
+  border-radius: 5px;
+  text-align: center;
+  width: 8rem;
+  padding: 3px 0px;
+  color: blue;
+  font-family: "Nunito", sans-serif;
+  font-size: medium;
+  border: 1px solid rgb(144, 144, 255);
+  margin-bottom: 5px;
+}
+
+#clearBtn:hover {
+  border: 1px solid rgb(95, 95, 255);
+  box-shadow: 0px 0px 1px 3px rgb(134, 134, 255);
+  background-color: rgb(219, 241, 255);
+  font-weight: bolder;
+  text-shadow: 0 0 1px rgb(145, 145, 182);
+}
+
+#clearBtn:active {
+  background-color: rgb(130, 182, 215);
+  color: rgb(216, 216, 246);
+  text-shadow: 0 0 2px rgb(187, 187, 207);
 }
 
 /* color picker */
@@ -199,4 +288,43 @@ input[type="number"]::-webkit-outer-spin-button {
 
 #footer {
   height: 50px;
+}
+
+/* mode styling */
+
+.mode {
+  padding: 5px;
+  margin: 0px 10px;
+  color: blue;
+  border: 1px solid rgb(144, 144, 255);
+  border-radius: 9px;
+  margin-bottom: 5px;
+  background-color: rgb(234, 247, 255);
+}
+
+.mode:hover {
+  border: 1px solid rgb(95, 95, 255);
+  box-shadow: 0px 0px 1px 3px rgb(134, 134, 255);
+  background-color: rgb(219, 241, 255);
+  font-weight: bolder;
+  text-shadow: 0 0 1px rgb(145, 145, 182);
+}
+
+.mode:active {
+  color: rgb(234, 234, 255);
+  text-shadow: 0 0 2px rgb(0, 0, 255);
+  background-color: rgb(68, 172, 236);
+}
+
+.activeMode {
+  color: rgb(234, 234, 255);
+  text-shadow: 0 0 2px rgb(0, 0, 255);
+  background-color: rgb(68, 172, 236);
+}
+
+.activeMode:hover {
+  color: rgb(234, 234, 255);
+  text-shadow: 0 0 2px rgb(0, 0, 255);
+  background-color: rgb(68, 172, 236);
+  box-shadow: none;
 }

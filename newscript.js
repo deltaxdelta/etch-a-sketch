@@ -11,7 +11,7 @@
 function buildGrid(count) {
     
     wipeCanvas(); //needs to remove all canvasSquare divs before running
-    let etchy = document.getElementById('etchy'); //this needs to be initialized each time or cloning breaks things
+    let etchy = document.getElementById('etchy'); 
     span.innerText = count;
     let gridSize = count * count;
     for(i = 0; i < gridSize; i++) {addSquare();}
@@ -20,7 +20,7 @@ function buildGrid(count) {
 }
 
 function addSquare() {
-    let etchy = document.getElementById('etchy'); //this needs to be initialized each time or cloning breaks things
+    let etchy = document.getElementById('etchy'); 
     let div = document.createElement('div');
     etchy.appendChild(div);
     div.className = 'canvasSquare';
@@ -103,6 +103,13 @@ function resetGrid() {
 }
 
 
+//used by getMode and modeButtons
+const blackMode = document.getElementById('blacken');
+        const rainbowMode = document.getElementById('rainbow');
+        const grayMode = document.getElementById('grayScale');
+        const eraseMode = document.getElementById('eraser');
+        const customColor = document.getElementById('customColor');
+
 //set one eventListener on grid squares
 const etchy = document.getElementById('etchy');
 
@@ -112,11 +119,7 @@ function getMode(e) {
    //this keeps it for the children
     if(e.target !== e.currentTarget) {
         let enteredSquare = e.target;
-        const blackMode = document.getElementById('blacken');
-        const rainbowMode = document.getElementById('rainbow');
-        const grayMode = document.getElementById('grayScale');
-        const eraseMode = document.getElementById('eraser');
-        const customColor = document.getElementById('customColor');
+        
 
         if(blackMode.checked == true) {
             enteredSquare.removeAttribute('style');
@@ -200,14 +203,104 @@ function getMode(e) {
 
 }
 
-//each featue gets an on/off true/false
-//only one can be true at a time --radio buttons?
-//if [mode] is true, run [relevant function] in getMode
-//else [nuthin?]
+//default to 16x16 grid on load/reload
 
-//radio values
-// blacken
-// customColor
-// rainbow
-// grayScale
-// eraser
+window.addEventListener('onload', buildGrid(16));
+
+//improving the UI
+
+//setting modes with clicks on buttons
+
+let modeArea = document.getElementById('modeArea');
+//could this just be elements by classList mode?
+
+let modeDivs = modeArea.childNodes;
+
+modeArea.addEventListener('click', colorActive);
+
+
+function colorActive(e) {
+     //remove activeMode for other buttons
+    otherClear();
+
+         
+    //this keeps it for the children
+    if(e.target !== e.currentTarget) {
+        let currentMode = e.target;
+        if (currentMode.tagName == 'LABEL') {
+            currentMode.parentNode.classList.add('activeMode');
+            console.log(currentMode);
+            console.log('this was the label');
+            
+        }
+        else {currentMode.classList.add('activeMode'); 
+                console.log(currentMode);
+                console.log('this was the div')}
+
+    }
+   
+
+
+
+    e.stopPropagation(); 
+}
+
+//super stuck with removing specific class from children of modeArea so will do this for now. I either can't iterate through the pile of elements or remove method doesn't work
+//and yet this does
+function clearActive () {
+    document.getElementById('black').classList.remove('activeMode');
+    document.getElementById('color').classList.remove('activeMode');
+    document.getElementById('multi').classList.remove('activeMode');
+    document.getElementById('shady').classList.remove('activeMode');
+    document.getElementById('white').classList.remove('activeMode');
+    
+}
+
+function otherClear () {
+    Array.from(modeDivs).forEach((el) => {
+        if (el.id == undefined){}
+        else {el.classList.remove('activeMode')}
+    });
+}
+
+//for the divs/pseudo buttons
+modeArea.addEventListener('click', setMode);
+
+function setMode(e) {
+    
+    let clickedOn = e.target;
+   
+    if (clickedOn.id == 'black') {
+        blackMode.checked = true;
+    }
+
+    else if (clickedOn.id == 'color') {
+        customColor.checked = true;
+    }
+
+    else if (clickedOn.id == 'multi') {
+        rainbowMode.checked = true;
+    }
+
+    else if (clickedOn.id == 'shady') {
+        grayMode.checked = true;
+    }
+
+    else if (clickedOn.id == 'white') {
+        eraseMode.checked = true;
+    }
+
+}
+
+//clicking label also sets active mode on psuedo button
+
+let radios = document.querySelectorAll('input[type=radio]');
+
+radios.forEach(radio => radio.addEventListener('change', markActive));
+
+function markActive(e) {
+    otherClear();
+    let activeRadio = e.target;
+    activeRadio.parentElement.classList.add('activeMode');
+}
+

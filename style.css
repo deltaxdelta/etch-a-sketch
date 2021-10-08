@@ -328,3 +328,45 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: rgb(68, 172, 236);
   box-shadow: none;
 }
+
+/* color input */
+
+#picker {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+#picker::-webkit-color-swatch {
+  border-radius: 3px;
+  border: none;
+}
+
+#picker::-moz-color-swatch {
+  border-radius: 3px;
+  border: none;
+}
+
+#color {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modeIcon {
+  height: 15px;
+  width: auto;
+}
+
+#rubber {
+  padding-left: 20px;
+}
+
+#blackSwatch {
+  padding-left: 30px;
+}

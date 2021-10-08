@@ -110,6 +110,13 @@ const blackMode = document.getElementById('blacken');
         const eraseMode = document.getElementById('eraser');
         const customColor = document.getElementById('customColor');
 
+//pseudo button divs
+const blackBtn = document.getElementById('black');
+const colorBtn = document.getElementById('color');
+const multiBtn = document.getElementById('multi');
+const shadyBtn = document.getElementById('shady');
+const whiteBtn = document.getElementById('white');
+
 //set one eventListener on grid squares
 const etchy = document.getElementById('etchy');
 
@@ -122,12 +129,13 @@ function getMode(e) {
         
 
         if(blackMode.checked == true) {
+          
             enteredSquare.removeAttribute('style');
             enteredSquare.removeAttribute('data-bkgd');
             enteredSquare.setAttribute('style', 'background-color: black;' );}
          
         else if (customColor.checked == true) {
-            
+        
             enteredSquare.removeAttribute('data-bkgd');
             const picker = document.getElementById('picker');
             enteredSquare.setAttribute('style', 'background-color: ' + picker.value + ';' );
@@ -135,12 +143,14 @@ function getMode(e) {
         
         
         else if (rainbowMode.checked == true) {
+        
             enteredSquare.removeAttribute('style');
             enteredSquare.removeAttribute('data-bkgd');
             let randoColor = Math.floor(Math.random()*16777215).toString(16);
             enteredSquare.setAttribute('style', 'background-color: #' + randoColor + ';' );}
         
         else if (grayMode.checked == true) {
+         
             enteredSquare.removeAttribute('style');
             
 
@@ -190,6 +200,7 @@ function getMode(e) {
         }
 
         else if (eraseMode.checked == true) {
+           
             enteredSquare.removeAttribute('style');
             enteredSquare.removeAttribute('data-bkgd');
             enteredSquare.setAttribute('style', 'background-color: white;' );
@@ -233,6 +244,12 @@ function colorActive(e) {
             console.log('this was the label');
             
         }
+
+      else if (currentMode.id == 'picker') {
+        currentMode.parentNode.classList.add('activeMode');
+        customColor.checked = true;
+      }
+
         else {currentMode.classList.add('activeMode'); 
                 console.log(currentMode);
                 console.log('this was the div')}
@@ -263,7 +280,7 @@ function otherClear () {
     });
 }
 
-//for the divs/pseudo buttons
+//for the divs/pseudo buttons to click radio buttons
 modeArea.addEventListener('click', setMode);
 
 function setMode(e) {

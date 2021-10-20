@@ -11,6 +11,11 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -22,9 +27,9 @@
             <div id='leftMenu'>
                 <div id='setSquares'>
                     <div class='wrapper' id='gridAdjuster'>
-                        <div id='labelBlock'><label>Set Grid Size</label></div>
+                        <div id='labelBlock'><label>Size</label></div>
                         <div class='sizeControls' id='minusBtn'>
-                            <button class='sizeBtn' id='minus'>-</button>
+                            <button class='sizeBtn' id='minus'>—</button>
                         </div>
                         
                          <div id='displaySize'>  
@@ -49,38 +54,53 @@
                 </div>
 
                 <div id='modeArea'>
-                    <div>
-                        <input id='blacken' name='mode' type='radio' value='blacken'checked>
-                        <label>Black</label>
-                    </div>
+                    <label id='black' for='blacken' class='mode row activeMode'>
+                            <input id='blacken' name='mode' type='radio' value='blacken'checked>
+                            <span class='textLabel'>Black</span>
+                            <div id='blackSwatch'></div>
+
+                    </label>
 
 
-                   <div>
-                        <input id='customColor' name='mode' type='radio' value='customColor'>
-                        <label>Color</label>
+                   <label id='color' for='customColor' class='mode row'>
+                        
+                            <input id='customColor' name='mode' type='radio' value='customColor'>
+                            <span class='textLabel'>Color</span>
+                        
                         <input type='color' id='picker' name='currentColor' value='#0000FF'>
                             
-                   </div>
+                   </label>
 
 
-                    <div>
+                    <label id='multi' for='rainbow' class='mode row'>
                         <input id='rainbow' name='mode' type='radio' value='rainbow'>
-                        <label>Rainbow</label>
-                    </div>
+                        <span class='textLabel'>Rainbow</span>
+                            <img class='modeIcon' src='pics/rainbow brite.png'>
+                        
+                    </label>
 
 
-                    <div>
+                    <label id='shady' for='grayScale' class='mode row'>
                         <input id='grayScale' name='mode' type='radio' value='grayScale'>
-                        <label>Grayscale</label>
-                    </div>
+                        <span class='textLabel'>Grayscale</span>
+                            <img class='modeIcon' src='pics/rainbow dark.png'>
+                        
+                    </label>
 
 
-                    <div>
+                    <label id='white' for='eraser' class='mode row'>
                         <input id='eraser' name='mode' type='radio' value='eraser'>
-                        <label>Eraser</label>
+                        <span class='textLabel'>Eraser</span>
+                        <img id='rubber' class='modeIcon' src='pics/pink eraser.png'>
+
+                    </label>
+                    <!-- <div>
+                        Test radio
+                        
+                        <label id='testLabel' for='testRadio1'>
+                            <input type='radio' name='testRadio' value='tester' id='testRadio1'>Label for Tester</label>
                     </div>
-
-
+ -->
                 </div>
                 <!-- 
                     using buttons

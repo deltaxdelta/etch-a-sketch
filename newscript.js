@@ -33,7 +33,7 @@ function wipeCanvas() {
 const sizeSet = document.getElementById('currentSize');
 const span = document.getElementById('makeItSquare');
 
-sizeSet.addEventListener('input', getNum);
+sizeSet.addEventListener('change', getNum);
 
 function getNum() {
     //apparently you can still type in beyond min and max values, and also the function will run with no issue, this will overide

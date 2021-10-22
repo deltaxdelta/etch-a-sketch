@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Etch-a-Sketch</title>
+        <title>Gridoodler</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
@@ -15,6 +15,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap" rel="stylesheet">
 
     </head>
     <body>
@@ -22,7 +23,9 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         
-        <div class='container' id='header'></div>
+        <div class='container' id='header'>
+            Gridoodler
+        </div>
         <div class='container row' id='coreContent'>
             <div id='leftMenu'>
                 <div id='setSquares'>
@@ -49,9 +52,7 @@
                     </div>
                 </div>
                 
-                <div id='clearCanvas'>
-                   <button id='clearBtn'>Clear</button> 
-                </div>
+               
 
                 <div id='modeArea'>
                     <label id='black' for='blacken' class='mode row activeMode'>
@@ -94,14 +95,13 @@
                         <img id='rubber' class='modeIcon' src='pics/pink eraser.png'>
 
                     </label>
-                    <!-- <div>
-                        Test radio
-                        
-                        <label id='testLabel' for='testRadio1'>
-                            <input type='radio' name='testRadio' value='tester' id='testRadio1'>Label for Tester</label>
-                    </div>
- -->
+                    
+                    
                 </div>
+
+                <div id='clearCanvas'>
+                    <button id='clearBtn'>Clear</button> 
+                 </div>
                 <!-- 
                     using buttons
 

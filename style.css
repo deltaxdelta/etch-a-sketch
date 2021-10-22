@@ -1,6 +1,10 @@
 body {
   background-color: rgb(217, 221, 235);
   font-family: "Nunito", sans-serif;
+  height: 100vh;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -14,7 +18,11 @@ body {
 }
 
 #header {
-  height: 50px;
+  height: 6rem;
+  font-family: "Baloo 2", cursive, sans-serif;
+  font-size: 3.5rem;
+  padding: 1rem;
+  text-align: left;
 }
 
 #leftMenu {
@@ -22,7 +30,7 @@ body {
   padding-right: 10px;
   display: flex;
   flex-direction: column;
-  width: 20%;
+  min-width: 200px;
 }
 
 #canvasArea {
@@ -48,14 +56,6 @@ body {
   border-width: 1px;
 }
 
-.black {
-  background-color: black;
-}
-
-.white {
-  background-color: white;
-}
-
 /* glow settings */
 
 .glowText {
@@ -64,9 +64,9 @@ body {
 }
 
 /* widget for adjusting grid size */
-#setSquares {
+/* #setSquares {
   min-width: 100%;
-}
+} */
 
 .wrapper {
   display: grid;
@@ -210,8 +210,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* clear the grid button */
 #clearCanvas {
-  margin: 0px auto 10px auto;
   padding-top: 20px;
+  margin: 0px auto;
 }
 
 #clearBtn {
@@ -219,13 +219,14 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: rgb(234, 247, 255);
   border-radius: 5px;
   text-align: center;
-  width: 8rem;
   padding: 3px 0px;
   color: blue;
   font-family: "Nunito", sans-serif;
   font-size: medium;
+  font-weight: bolder;
   border: 1px solid rgb(144, 144, 255);
-  margin-bottom: 5px;
+  min-width: 150px;
+  max-width: 155px;
 }
 
 #clearBtn:hover {
@@ -290,24 +291,26 @@ input[type="number"]::-webkit-outer-spin-button {
 
 #footer {
   height: 50px;
+  margin-top: auto;
 }
 
 #modeArea {
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
 }
 
 /* mode styling */
 
 .mode {
   padding: 5px;
-  margin: 0px 10px;
+  margin: 3px auto;
   color: blue;
   border: 1px solid rgb(144, 144, 255);
   border-radius: 9px;
-  margin-bottom: 5px;
   background-color: rgb(234, 247, 255);
-  max-width: 140px;
+  min-width: 150px;
+  max-width: 155px;
   align-items: baseline;
 }
 
@@ -352,8 +355,9 @@ input[type="number"]::-webkit-outer-spin-button {
   border: none;
   cursor: pointer;
   align-self: center;
-  padding-left: 26px;
-  margin-left: 11px;
+  margin-left: auto;
+  padding-right: 5%;
+  width: 30px;
 }
 
 #picker::-webkit-color-swatch {
@@ -374,7 +378,7 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 15px;
   width: auto;
   margin-left: auto;
-  padding-right: 15%;
+  padding-right: 7%;
 }
 
 #blackSwatch {
@@ -384,10 +388,5 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 3px;
   align-self: center;
   margin-left: auto;
-  margin-right: 15%;
-}
-
-#testLabel {
-  border: 1px solid black;
-  border-radius: 5px;
+  margin-right: 5%;
 }
